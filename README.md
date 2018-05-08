@@ -1,0 +1,2 @@
+# ExcelSync
+Exporta existencias / syncf
