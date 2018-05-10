@@ -39,7 +39,9 @@ namespace Crossexcel
 
                 worksheet.ImportDataTable(tabla, true, 2,1);
                 worksheet.AutoFilters.FilterRange = worksheet.Range["A2:F2"];
-                worksheet.Range["A1"].Text = "Llantas y Rines del Guadiana S.A. de C.V. - Existencias LRG Al "+dateday+"- B4 Francisco Villa";
+                string namesuc = GetName(intSUCURSALID);
+                worksheet.Range["A1"].Text = "Llantas y Rines del Guadiana S.A. de C.V. - Existencias LRG Al " + dateday + namesuc;
+                // worksheet.Range["A1"].Text = "Llantas y Rines del Guadiana S.A. de C.V. - Existencias LRG Al "+dateday+"- B4 Francisco Villa";
 
                 IStyle headerStyle = workbook.Styles.Add("HeaderStyle");
                 headerStyle.BeginUpdate();
@@ -110,7 +112,8 @@ namespace Crossexcel
                 //hacer el subtotal pero conformula ** el otro marca error con total calculation 
                 //range.SubTotal(0, ConsolidationFunction.Sum, new int[] {1,rojos});
                 string namer = dateday;
-                string fileName = "LRG-Existencias al " + namer + "B4 Francisco Villa.xlsx";
+                string fileName = "LRG-Existencias al " + namer + namesuc+".xlsx";
+                // string fileName = "LRG-Existencias al " + namer + "B4 Francisco Villa.xlsx";
                 workbook.SaveAs(fileName);
                 workbook.Close();
                 excelEngine.Dispose();
@@ -146,16 +149,16 @@ namespace Crossexcel
             switch (empresa)
             {
                 case 1:
-                    conexion = "SELECT Numero_Corto_De_Sucursal, Codigo_De_Articulo, Cantidad FROM dbo.vtaFormaExistrenciasPorSucursalExistencias WHERE(Cantidad <> 0) and Numero_Corto_De_Sucursal ='1' ";
+                    conexion = "SELECT * FROM dbo.vtaExitencia1  "; ;
                     return conexion;
                     break;
 
                 case 2:
-                    conexion = "SELECT Numero_Corto_De_Sucursal, Codigo_De_Articulo, Cantidad FROM dbo.vtaFormaExistrenciasPorSucursalExistencias WHERE(Cantidad <> 0) and Numero_Corto_De_Sucursal ='2' ";
+                    conexion = "SELECT * FROM dbo.vtaExitencia2  "; ;
                     return conexion;
                     break;
                 case 3:
-                    conexion = "SELECT Numero_Corto_De_Sucursal, Codigo_De_Articulo, Cantidad FROM dbo.vtaFormaExistrenciasPorSucursalExistencias WHERE(Cantidad <> 0) and Numero_Corto_De_Sucursal ='3' ";
+                    conexion = "SELECT * FROM dbo.vtaExitencia3  "; ;
                     return conexion;
                     break;
 
@@ -169,16 +172,16 @@ namespace Crossexcel
                     break;
 
                 case 7:
-                    conexion = "SELECT Numero_Corto_De_Sucursal, Codigo_De_Articulo, Cantidad FROM dbo.vtaFormaExistrenciasPorSucursalExistencias WHERE(Cantidad <> 0) and Numero_Corto_De_Sucursal ='7' ";
+                    conexion = "SELECT * FROM dbo.vtaExitencia7  "; ;
                     return conexion;
                     break;
                 case 8:
-                    conexion = "SELECT Numero_Corto_De_Sucursal, Codigo_De_Articulo, Cantidad FROM dbo.vtaFormaExistrenciasPorSucursalExistencias WHERE(Cantidad <> 0) and Numero_Corto_De_Sucursal ='8' ";
+                    conexion = "SELECT * FROM dbo.vtaExitencia8  "; ;
                     return conexion;
                     break;
 
                 case 9:
-                    conexion = "SELECT Numero_Corto_De_Sucursal, Codigo_De_Articulo, Cantidad FROM dbo.vtaFormaExistrenciasPorSucursalExistencias WHERE(Cantidad <> 0) and Numero_Corto_De_Sucursal ='9' ";
+                    conexion = "SELECT * FROM dbo.vtaExitencia9  ";
                     return conexion;
                     break;
                 case 10:
@@ -219,6 +222,90 @@ namespace Crossexcel
                     break;
                 default:
                     conexion = "SERVER = 192.168.14.1; DATABASE = Punto_De_Venta; USER ID = sa; PASSWORD = dgo2007";
+                    return conexion;
+                    break;
+
+            }
+        }
+        static string GetName(int empresa)
+        {
+            string conexion;
+            switch (empresa)
+            {
+                case 1:
+                    conexion = "- B1 Felipe Pescador";
+                    return conexion;
+                    break;
+
+                case 2:
+                    conexion = "- B2 Francisco Villa 2" ;
+                    return conexion;
+                    break;
+                case 3:
+                    conexion = "- B3 Vizcaya";
+                    return conexion;
+                    break;
+
+                case 4:
+                    conexion = "- B4 Francisco Villa";
+                    return conexion;
+                    break;
+                case 5:
+                    conexion = "- B5 Blvd. Durango";
+                    return conexion;
+                    break;
+
+                case 7:
+                    conexion = "- B7 Mayoreo";
+                    return conexion;
+                    break;
+                case 8:
+                    conexion = "- B8 Libramiento San Ignacio";
+                    return conexion;
+                    break;
+
+                case 9:
+                    conexion = "- B9 Nazas";
+                    return conexion;
+                    break;
+                case 10:
+                    conexion = "- B10 Zarco";
+                    return conexion;
+                    break;
+
+                case 11:
+                    conexion = "- B11 Abastos Mayoreo";
+                    return conexion;
+                    break;
+                case 12:
+                    conexion = "- B12 Abastos Menudeo";
+                    return conexion;
+                    break;
+
+                case 13:
+                    conexion = "- B13 Miguel Aleman";
+                    return conexion;
+                    break;
+                case 15:
+                    conexion = "- B15 Triana";
+                    return conexion;
+                    break;
+
+                case 16:
+                    conexion = "- B16 Domingo Arrieta";
+                    return conexion;
+                    break;
+                case 17:
+                    conexion = "- B17 Centro Camionero Torreon";
+                    return conexion;
+                    break;
+
+                case 18:
+                    conexion = "- B18 Centro Camionero Menudeo";
+                    return conexion;
+                    break;
+                default:
+                    conexion = "NO SE RECONOCE SU CONFIGURACION";
                     return conexion;
                     break;
 
